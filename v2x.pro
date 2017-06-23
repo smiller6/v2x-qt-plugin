@@ -27,9 +27,9 @@ DISTFILES = qmldir
 }
 #unix {
 qmldir.files = qmldir
-#installPath = $$[QT_INSTALL_QML]/$$replace(uri, \\., /)
-installPath = /usr/lib/qt5/lib/qml/$$replace(uri, \\., /)
-qmldir.path = $$installPath
-target.path = $$installPath
+installPath = $$[QT_INSTALL_QML]/$$replace(uri, \\., /)
+#installPath = /usr/lib/qt5/lib/qml/$$replace(uri, \\., /)
+target.path = /usr/lib/qt5/qml/$$replace(uri, \\., /)
+qmldir.path = $$target.path
 INSTALLS += target qmldir
 #}

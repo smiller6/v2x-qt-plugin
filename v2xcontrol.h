@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QtDebug>
+#include <QThread>
 #include "v2xcommand.h"
 
 /* Control script parameters

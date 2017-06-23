@@ -27,7 +27,7 @@ void V2xControl::requestPowerOff(const int time_ms)
     // immediately emit a notification signal that the power will be turning off in a time
     emit notifyPowerOff(time_ms);
     // emit requested signal after requested time, to request actual power off action
-    QTimer::singleShot(time_ms, this, SLOT(onRequestPowerOff(time_ms)));
+    QTimer::singleShot(time_ms, this, SLOT(onRequestPowerOff()));
 }
 
 void V2xControl::onRequestPowerOff() {
@@ -52,14 +52,16 @@ void V2xControl::sendCommand(QString v2x_command_string)
     //send this command to the bash script
     QProcess process;
     QStringList list;
-    list << this->_cOption
-         << this->_controlScriptPath
-         << this->_controlScriptName
-         << v2x_command_string
-         << "\r";
+     list << this->_controlScriptPath
+          << this->_cOption
+          << this->_controlScriptName
+          << v2x_command_string
+          << "\r";
+    qDebug() << list;
     process.setProgram(_bashProcess);
     process.setArguments(list);
     process.start(QIODevice::ReadWrite);
+    process.waitForFinished();
 }
 
 V2xControl::~V2xControl()
